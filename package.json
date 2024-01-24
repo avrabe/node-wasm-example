@@ -3,18 +3,28 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "start": "npm run build && node dist/index.js",
-    "build": "tsc",
+    "jco": "cargo component build --release && jco transpile target/wasm32-wasi/release/hello.wasm --no-namespaced-exports --tla-compat --minify -o src/handler",
+    "start": "npm run jco && npm run build && npm run postbundle && node dist/index.js",
+    "build": "tsc -b ",
+    "postbundle": "copyfiles -u 1 src/handler/* dist/",
     "init": "tsc --init",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rimraf lib dist tsconfig.tsbuildinfo"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "type": "module",
   "devDependencies": {
     "@bytecodealliance/jco": "^0.14.2",
     "@types/node": "^20.11.5",
+    "copyfile": "^0.1.2",
+    "copyfiles": "^2.4.1",
+    "rimraf": "^5.0.5",
     "typescript": "^5.3.3"
   }
 }

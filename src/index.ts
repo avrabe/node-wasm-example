@@ -1,6 +1,9 @@
-function hello(name: string) {
-    console.log(`Hello ${name}!`);
+import { hello } from './handler/hello';
+
+function local_hello(name: string) {
+    let result = hello.Hello.createWorld().execute();
+    console.log(`Hello ${name} ${result}!`);
   }
   
-  hello('World');
+  local_hello('World');
   
