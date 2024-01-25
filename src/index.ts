@@ -1,7 +1,7 @@
-import { hello } from './handler/hello';
-
+import { hello, $init } from './handler/hello.js';
+await $init;
 function local_hello(name: string) {
-    let result = hello.Hello.createWorld().execute();
+    let result = hello.Hello.createWorld().calls();
     console.log(`Hello ${name} ${result}!`);
   }
   
