@@ -22,9 +22,9 @@ jobs:
           toolchain: nightly
           override: true
           target: wasm32-wasi
+    - uses: Swatinem/rust-cache@v2
     - name: Install udeps
       run: cargo install cargo-component
-    - uses: Swatinem/rust-cache@v2
 
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
