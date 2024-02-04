@@ -16,6 +16,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: Install stable toolchain
+      uses: actions-rs/toolchain@v1
+      with:
+          toolchain: nightly
+          override: true
+          target: wasm32-wasi
+    - name: Install udeps
+      run: cargo install cargo-component
+    - uses: Swatinem/rust-cache@v2
 
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
@@ -25,4 +34,4 @@ jobs:
     - name: Build
       run: |
         npm install
-        npx run build
+        npx run start
