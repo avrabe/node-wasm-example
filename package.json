@@ -26,5 +26,9 @@
     "copyfiles": "^2.4.1",
     "rimraf": "^5.0.5",
     "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "inversify": "^6.0.2",
+    "reflect-metadata": "^0.2.1"
   }
 }

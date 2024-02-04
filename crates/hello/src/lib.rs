@@ -1,8 +1,9 @@
-cargo_component_bindings::generate!();
+mod bindings;
+
+use bindings::exports::component::hello::hello::GuestHello;
 
 use std::cell::RefCell;
 
-use crate::bindings::exports::component::hello::hello::GuestHello;
 use cargo_component_bindings::rt::Resource;
 
 pub struct Hello {

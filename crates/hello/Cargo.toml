@@ -6,6 +6,8 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+wit-bindgen = { version = "0.16.0", default-features = false, features = ["realloc"]}
+
 cargo-component-bindings = "0.6.0"
 
 [lib]
@@ -15,3 +17,5 @@ crate-type = ["cdylib"]
 package = "component:hello"
 
 [package.metadata.component.dependencies]
+
+[package.metadata.component.bindings]
