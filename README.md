@@ -1,5 +1,7 @@
 # node-wasm-example
 
+[![Build](https://github.com/avrabe/node-wasm-example/actions/workflows/webpack.yml/badge.svg)](https://github.com/avrabe/node-wasm-example/actions/workflows/webpack.yml)
+
 Preparations
 
 ```sh
