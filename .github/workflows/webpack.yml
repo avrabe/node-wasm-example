@@ -21,11 +21,11 @@ jobs:
     - name: Install stable toolchain
       uses: actions-rs/toolchain@v1
       with:
-          toolchain: nightly
+          toolchain: stable
           override: true
           target: wasm32-wasi
     - uses: Swatinem/rust-cache@v2
-    - name: Install udeps
+    - name: Install component
       run: cargo install cargo-component
 
     - name: Use Node.js ${{ matrix.node-version }}
