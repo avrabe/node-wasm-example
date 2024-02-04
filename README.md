@@ -23,6 +23,7 @@ cargo install cargo-component
 ```
 
 ```sh
+npm install
 npm run jco
 node src/hello.mjs
 ```
@@ -30,5 +31,6 @@ node src/hello.mjs
 Example using typescript
 
 ```sh
+npm install
 npm run start
 ```

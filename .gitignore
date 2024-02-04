@@ -2,3 +2,4 @@ node_modules
 dist
 target
 src/handler
+crates/hello/src/bindings.rs
