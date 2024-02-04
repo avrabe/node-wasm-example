@@ -19,7 +19,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 # Add WASM-WASI as build target
 rustup target add wasm32-wasi
 # Install cargo component
-cargo install cargo-component
+cargo install cargo-component --locked
 ```
 
 ```sh
