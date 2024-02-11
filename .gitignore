@@ -3,3 +3,4 @@ dist
 target
 src/handler
 crates/hello/src/bindings.rs
+lib/
