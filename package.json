@@ -20,7 +20,7 @@
   "license": "ISC",
   "type": "module",
   "devDependencies": {
-    "@bytecodealliance/jco": "^0.14.2",
+    "@bytecodealliance/jco": "^1.0.0",
     "@types/node": "^20.11.5",
     "copyfile": "^0.1.2",
     "copyfiles": "^2.4.1",
