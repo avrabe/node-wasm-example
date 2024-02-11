@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import { hello, $init } from './handler/hello.js';
 import { injectable, inject } from 'inversify';
 
@@ -5,6 +6,10 @@ import { injectable, inject } from 'inversify';
 interface Logger {
   log(msg: string): void;
 }
+
+const SERVICE_IDENTIFIER = {
+  LOGGER: Symbol.for("Logger"),
+};
 
 @injectable()
 class ConsoleLogger implements Logger {
@@ -16,14 +21,8 @@ class ConsoleLogger implements Logger {
 @injectable()
 class ApiClient {
   private world;
-  constructor(@inject(ConsoleLogger) private logger: Logger) {
-    this.init();
+  constructor(@inject(SERVICE_IDENTIFIER.LOGGER) private logger: Logger) {
     this.world = hello.Hello.createWorld();
-  }
-  async init() {
-    await $init;
-    
-    // do something else
   }
 
   public makeApiCall() {
@@ -32,28 +31,17 @@ class ApiClient {
 }
 
 
-
+await $init;
 // Set up container
 import { Container } from 'inversify';
 
 const container = new Container();
-container.bind<Logger>('Logger').to(ConsoleLogger);
+container.bind<Logger>(SERVICE_IDENTIFIER.LOGGER).to(ConsoleLogger);
 container.bind<ApiClient>(ApiClient).toSelf();
 
 // Usage
 const apiClient = container.get<ApiClient>(ApiClient);
-apiClient.makeApiCall();
 
-apiClient.makeApiCall();
-
-
- function local_hello(name: string) {
-     let result = hello.Hello.createWorld();
-     for (let i = 0; i < 1000000; i++) {
-         console.log(`Hello  ${result.calls()}!`);
-     }
-   }
-  
-  
-   local_hello('World');
-  
+for (let i = 0; i < 10; i++) {
+  apiClient.makeApiCall();
+}
