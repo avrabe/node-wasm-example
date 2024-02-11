@@ -2,12 +2,13 @@
   "name": "wasm-example",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.cjs",
   "files": [
     "dist"
   ],
+  "type": "module",
   "scripts": {
-    "jco": "cargo component build --release && jco transpile target/wasm32-wasi/release/hello.wasm --no-namespaced-exports --tla-compat --minify -o src/handler",
+    "jco": "cargo component build --release && jco transpile target/wasm32-wasi/release/hello.wasm --no-namespaced-exports --tla-compat -o src/handler",
     "start": "npm run jco && npm run build && npm run postbundle && node dist/index.js",
     "build": "tsc -b ",
     "postbundle": "copyfiles -u 1 src/handler/* dist/",
@@ -18,7 +19,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "module",
   "devDependencies": {
     "@bytecodealliance/jco": "^1.0.0",
     "@types/node": "^20.11.5",
@@ -28,6 +28,8 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
+    "@bytecodealliance/preview2-shim": "^0.15.1",
+    "gulp": "^4.0.2",
     "inversify": "^6.0.2",
     "reflect-metadata": "^0.2.1"
   }
