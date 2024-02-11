@@ -14,7 +14,7 @@ const SERVICE_IDENTIFIER = {
 @injectable()
 class ConsoleLogger implements Logger {
   public log(msg: string) {
-    console.log(msg); 
+    console.log(msg);
   }
 }
 
