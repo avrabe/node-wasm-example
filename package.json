@@ -6,12 +6,12 @@
   "files": [
     "dist"
   ],
-  "type": "module",
   "scripts": {
-    "jco": "cargo component build --release && jco transpile target/wasm32-wasi/release/hello.wasm --no-namespaced-exports --tla-compat -o src/handler",
-    "start": "npm run jco && npm run build && npm run postbundle && node dist/index.js",
+    "jco": "cargo component build --release && jco transpile target/wasm32-wasi/release/hello.wasm --no-namespaced-exports -o src/handler",
+    "start": "npm run jco && npm run build && npm run postbundle &&  npm run bundle && node dist/index.js",
+    "bundle": "webpack",
     "build": "tsc -b ",
-    "postbundle": "copyfiles -u 1 src/handler/* dist/",
+    "postbundle": "copyfiles -u 1 src/handler/* lib/",
     "init": "tsc --init",
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rimraf lib dist tsconfig.tsbuildinfo"
@@ -21,16 +21,23 @@
   "license": "ISC",
   "devDependencies": {
     "@bytecodealliance/jco": "^1.0.0",
+    "@eclipse-glsp/ts-config": "^2.0.0",
     "@types/node": "^20.11.5",
     "copyfile": "^0.1.2",
     "copyfiles": "^2.4.1",
     "rimraf": "^5.0.5",
-    "typescript": "^5.3.3"
+    "source-map-loader": "^5.0.0",
+    "typescript": "^5.3.3",
+    "webpack": "^5.90.1",
+    "webpack-cli": "^5.1.4"
   },
   "dependencies": {
     "@bytecodealliance/preview2-shim": "^0.15.1",
     "gulp": "^4.0.2",
     "inversify": "^6.0.2",
     "reflect-metadata": "^0.2.1"
+  },
+  "engines": {
+    "node": ">=14.18.0"
   }
 }

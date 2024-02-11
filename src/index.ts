@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import { hello, $init } from './handler/hello.js';
+import { hello } from './handler/hello.js';
 import { injectable, inject } from 'inversify';
 
 
@@ -31,7 +31,7 @@ class ApiClient {
 }
 
 
-await $init;
+//await $init;
 // Set up container
 import { Container } from 'inversify';
 
