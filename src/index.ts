@@ -1,7 +1,6 @@
 import 'reflect-metadata';
-import { hello } from './handler/hello.js';
+import { hello, $init } from './handler/hello.js';
 import { injectable, inject } from 'inversify';
-
 
 interface Logger {
   log(msg: string): void;
@@ -20,18 +19,22 @@ class ConsoleLogger implements Logger {
 
 @injectable()
 class ApiClient {
-  private world;
+  //private world;
   constructor(@inject(SERVICE_IDENTIFIER.LOGGER) private logger: Logger) {
-    this.world = hello.Hello.createWorld();
+    //this.world = instantiate(getCoreModule);
+    //this.world = hello.Hello.createWorld();
   }
 
-  public makeApiCall() {
-    this.logger.log(this.world.calls());
+  public async makeApiCall() {
+    await $init;
+    let world = hello.Hello.createWorld();
+
+    //let hh = this.world.createWorld();
+    this.logger.log(world.calls());
   }
 }
 
 
-//await $init;
 // Set up container
 import { Container } from 'inversify';
 
@@ -45,3 +48,5 @@ const apiClient = container.get<ApiClient>(ApiClient);
 for (let i = 0; i < 10; i++) {
   apiClient.makeApiCall();
 }
+
+
