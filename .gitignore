@@ -4,3 +4,4 @@ target
 src/handler
 crates/hello/src/bindings.rs
 lib/
+tsconfig.tsbuildinfo
