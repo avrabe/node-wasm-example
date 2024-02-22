@@ -2,15 +2,16 @@
   "name": "wasm-example",
   "version": "1.0.0",
   "description": "",
-  "main": "index.cjs",
+  "private": true,
   "files": [
     "dist"
   ],
   "scripts": {
-    "jco": "cargo component build --release && jco transpile target/wasm32-wasi/release/hello.wasm --no-namespaced-exports -o src/handler",
-    "start": "npm run jco && npm run build && npm run postbundle &&  npm run bundle && node dist/index.js",
-    "bundle": "webpack",
-    "build": "tsc -b ",
+    "jco": "cargo component build --release && jco transpile target/wasm32-wasi/release/hello.wasm --tla-compat  --no-namespaced-exports -o src/handler",
+    "start": "npm run build && node dist/index.bundle.js",
+    "build": "npm run jco && npm run tsc && npm run postbundle &&  npm run bundle",
+    "bundle": "webpack --config webpack.config.js",
+    "tsc": "tsc -b ",
     "postbundle": "copyfiles -u 1 src/handler/* lib/",
     "init": "tsc --init",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -25,10 +26,12 @@
     "@types/node": "^20.11.5",
     "copyfile": "^0.1.2",
     "copyfiles": "^2.4.1",
+    "raw-loader": "^4.0.2",
     "rimraf": "^5.0.5",
     "source-map-loader": "^5.0.0",
     "typescript": "^5.3.3",
     "webpack": "^5.90.1",
+    "webpack-bundle-analyzer": "^4.10.1",
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {

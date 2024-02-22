@@ -14,31 +14,46 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0 OR MIT
  ********************************************************************************/
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
+
 const path = require('path');
 const buildRoot = path.resolve(__dirname, 'lib');
+const helloRoot = path.resolve(buildRoot, 'handler');
 const appRoot = path.resolve(__dirname, 'dist');
 
 /**@type {import('webpack').Configuration}*/
 module.exports = {
-    entry: [path.resolve(buildRoot, 'index.js')],
+    entry: {
+        index: path.resolve(buildRoot, 'index.js'),
+    },
     output: {
-        filename: 'index.js',
-        path: appRoot
+        filename: '[name].bundle.js',
+        path: appRoot,
+        clean: true
     },
     mode: 'development',
-    devtool: 'source-map',
     resolve: {
-        extensions: ['.ts', '.tsx', '.js']
+        extensions: ['.wasm', '.js'],
+        exportsFields: ['exports', 'hello'],
+        importsFields: ['hello'],
+        modules: [
+            'node_modules', // The default
+            'src'
+          ] 
     },
     target: 'node',
+    devtool:'source-map',
     module: {
         rules: [
             {
                 test: /\.js$/,
-                use: ['source-map-loader'],
-                enforce: 'pre'
+                use: ['source-map-loader']
             }
         ]
     },
-    ignoreWarnings: [/Failed to parse source map/, /Can't resolve .* in '.*ws\/lib'/]
+    ignoreWarnings: [/Failed to parse source map/, /Can't resolve .* in '.*ws\/lib'/],
+    plugins: [
+        //new BundleAnalyzerPlugin()
+    ]
 };
