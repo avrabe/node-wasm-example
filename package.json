@@ -23,7 +23,7 @@
   "devDependencies": {
     "@bytecodealliance/jco": "^1.0.2",
     "@eclipse-glsp/ts-config": "^2.0.0",
-    "@types/node": "^20.11.20",
+    "@types/node": "^20.11.26",
     "copyfile": "^0.1.2",
     "copyfiles": "^2.4.1",
     "raw-loader": "^4.0.2",
