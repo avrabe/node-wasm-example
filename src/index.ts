@@ -19,21 +19,19 @@ class ConsoleLogger implements Logger {
 
 @injectable()
 class ApiClient {
-  //private world;
+  private world;
   constructor(@inject(SERVICE_IDENTIFIER.LOGGER) private logger: Logger) {
     //this.world = instantiate(getCoreModule);
-    //this.world = hello.Hello.createWorld();
+    this.world = hello.Hello.createWorld();
   }
 
   public async makeApiCall() {
-    await $init;
-    let world = hello.Hello.createWorld();
+    //let world = hello.Hello.createWorld();
 
     //let hh = this.world.createWorld();
-    this.logger.log(world.calls());
+    this.logger.log(this.world.calls());
   }
 }
-
 
 // Set up container
 import { Container } from 'inversify';
@@ -43,10 +41,14 @@ container.bind<Logger>(SERVICE_IDENTIFIER.LOGGER).to(ConsoleLogger);
 container.bind<ApiClient>(ApiClient).toSelf();
 
 // Usage
-const apiClient = container.get<ApiClient>(ApiClient);
+(async () => {
+  await $init;
+  const apiClient = container.get<ApiClient>(ApiClient);
+  for (let i = 0; i < 100; i++) {
+    apiClient.makeApiCall();
+  }
+})();
 
-for (let i = 0; i < 10; i++) {
-  apiClient.makeApiCall();
-}
+
 
 
