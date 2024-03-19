@@ -21,7 +21,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@bytecodealliance/jco": "^1.0.2",
+    "@bytecodealliance/jco": "^1.0.3",
     "@eclipse-glsp/ts-config": "^2.0.0",
     "@types/node": "^20.11.30",
     "copyfile": "^0.1.2",
